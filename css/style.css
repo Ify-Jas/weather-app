@@ -1,0 +1,114 @@
+/*variable*/
+:root{
+    --blue: rgb(101, 199, 206);
+    --orange: rgb(202, 145, 23);
+    --grey: rgba(199, 194, 197, 0.829);
+    
+}
+
+/*resets*/
+* {
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    height: 100%;
+}
+header {
+    height: 150px;
+    background-color: var(--grey);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    font-family: sans-serif;
+
+}
+aside, .pb-3 {
+    margin: 20px;
+  
+}
+aside h2, input, button {
+    padding: 10px;
+    margin: 10px;
+}
+
+
+ /*global variables*/
+ .text-center {
+    text-align: center;
+}
+.justify-center {
+    justify-content: center;
+}
+
+ /*custom styles*/
+ header h1 {
+    padding: 20px;
+    
+ }
+
+ .row {
+    display: flex;
+ }
+
+ input.weather-search{
+    padding: 8px 15px;
+    width: 250px;
+    border-radius: 20px;
+    border: 1.5px solid var(--blue);
+    outline: none;
+    margin-bottom: 35px;
+    color: #555;
+
+}
+button {
+    width: 150px;
+    border-radius: 10px;
+    border: 1.5px solid var(--blue);
+    font-size: 15px;
+}
+button:hover {
+    background-color: var(--blue);
+}
+
+.weather-card-main, .weather-card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 20px;
+    border: 1.5px solid var(--blue);
+    border-radius: 10px;
+    box-shadow: 5px 10px var(--blue);
+    background-color: var(--grey);
+}
+h3, p {
+    padding: 10px;
+    font-weight: bold;
+    
+}
+body div h2 {
+    padding: 10px;
+    margin: 20px;
+    
+}
+
+/*responsive style*/
+@media (max-width:768px) {
+    .forecast-card {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .today-card {
+        width: 75%;
+    }
+}
+
+
+
+
+
+
+
