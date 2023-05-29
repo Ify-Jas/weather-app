@@ -18,6 +18,7 @@ function noCity() {
 
 function displayWeather(currentData){
     todayCard.html('');
+    forMedia.html('');
     var city = searchInput.val().trim();
     var todayDate = moment().format("LL");
     var iconImgCurrent = currentData.weather[0].icon;
@@ -57,6 +58,7 @@ function displayWeather(currentData){
 
 function displayForecast(forecastData){
     forecastCard.html('');
+    forMediaForecast.html('');
     var city = searchInput.val().trim();
     
     if(forWidth <= 468){
@@ -151,6 +153,8 @@ function getWeather(event) {
    
 function init() { 
     $('.search-button').on('click', getWeather); 
+
+    
    
 }
 
