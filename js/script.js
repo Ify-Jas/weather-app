@@ -5,7 +5,12 @@ var forecastCard = $('.forecast-card');
 var listGroup = $('.list-group');
 var forMedia = $('.forMedia');
 var forMediaForecast = $('.forMediaForecast');
-var width = document.body.style.width;
+var fiveDay = $('.fiveDay');
+var fiveDaySmall = $('.fiveDaySmall');
+
+var forWidth = screen.width;
+console.log(forWidth);
+
 
 function noCity() {
     todayCard.html('<p>Please type a city to search.</p>')
@@ -20,7 +25,8 @@ function displayWeather(currentData){
     if(!city) {
         noCity();
     } 
-    else if(city && width<= 468){
+    else if(city && forWidth<= 468){
+        fiveDay.html('');
         forMedia.append(`
         <div class="weather-card-main">
            <h3>${currentData.name}   (${todayDate}) </h3>
@@ -32,6 +38,7 @@ function displayWeather(currentData){
         `)
     } 
     else{
+        fiveDaySmall.html('');
         todayCard.append(`
         <div class="weather-card-main">  
            <h3>${currentData.name}   (${todayDate}) </h3>
@@ -52,7 +59,7 @@ function displayForecast(forecastData){
     forecastCard.html('');
     var city = searchInput.val().trim();
     
-    if(width <= 468){
+    if(forWidth <= 468){
         for(var i=4; i < 37; i+=8) {
             var iconImgForecast = forecastData.list[i].weather[0].icon;
             var forecastDay = forecastData.list[i].dt_txt
