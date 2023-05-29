@@ -3,6 +3,8 @@ var searchInput = $('.weather-search');
 var todayCard = $('.today-card');
 var forecastCard = $('.forecast-card');      
 var listGroup = $('.list-group');
+var forMedia = $('.forMedia');
+var forMediaForecast = $('.forMediaForecast');
 
 function noCity() {
     todayCard.html('<p>Please type a city to search.</p>')
@@ -16,7 +18,17 @@ function displayWeather(currentData){
 
     if(!city) {
         noCity();
-    } else {
+    } else if(city && document.body.style.maxWidth<= 468){
+        forMedia.append(`
+        <div class="weather-card-main">
+           <h3>${currentData.name}   (${todayDate}) </h3>
+           <img src="http://openweathermap.org/img/wn/${iconImgCurrent}.png" height="100" width="100">
+           <p>Temp: ${Math.round(currentData.main.temp)}℃</p>
+           <p>Wind: ${Math.round(currentData.wind.speed)}m/s</p>
+           <p>Humidity: ${currentData.main.humidity}%</p>
+        </div>
+        `)
+    } else{
         todayCard.append(`
         <div class="weather-card-main">  
            <h3>${currentData.name}   (${todayDate}) </h3>
@@ -36,25 +48,48 @@ function displayWeather(currentData){
 function displayForecast(forecastData){
     forecastCard.html('');
     var city = searchInput.val().trim();
+    
+    if(document.body.style.maxWidth <= 468){
+        for(var i=4; i < 37; i+=8) {
+            var iconImgForecast = forecastData.list[i].weather[0].icon;
+            var forecastDay = forecastData.list[i].dt_txt
+            var dayFormat = moment(forecastDay).format('LL');
+            
+            forMediaForecast.append(`
+              <div class="weather-card">
+                  <h3>${dayFormat}</h3>
+                  <img src="http://openweathermap.org/img/wn/${iconImgForecast}@2x.png">
+                  <p>Temp: ${Math.round(forecastData.list[i].main.temp)}℃</p>
+                  <p>Wind: ${Math.round(forecastData.list[i].wind.speed)}m/s</p>
+                  <p>Humidity: ${forecastData.list[i].main.humidity}%</p>
+              </div>
+                  
+              `)
+          } 
+
+    } else {
+        for(var i=4; i < 37; i+=8) {
+            var iconImgForecast = forecastData.list[i].weather[0].icon;
+            var forecastDay = forecastData.list[i].dt_txt
+            var dayFormat = moment(forecastDay).format('LL');
+            
+            forecastCard.append(`
+              <div class="weather-card">
+                  <h3>${dayFormat}</h3>
+                  <img src="http://openweathermap.org/img/wn/${iconImgForecast}@2x.png">
+                  <p>Temp: ${Math.round(forecastData.list[i].main.temp)}℃</p>
+                  <p>Wind: ${Math.round(forecastData.list[i].wind.speed)}m/s</p>
+                  <p>Humidity: ${forecastData.list[i].main.humidity}%</p>
+              </div>
+                  
+              `)
+          } 
+
+    }
 
     
 
-    for(var i=4; i < 37; i+=8) {
-      var iconImgForecast = forecastData.list[i].weather[0].icon;
-      var forecastDay = forecastData.list[i].dt_txt
-      var dayFormat = moment(forecastDay).format('LL');
-      
-      forecastCard.append(`
-        <div class="weather-card">
-            <h3>${dayFormat}</h3>
-            <img src="http://openweathermap.org/img/wn/${iconImgForecast}@2x.png">
-            <p>Temp: ${Math.round(forecastData.list[i].main.temp)}℃</p>
-            <p>Wind: ${Math.round(forecastData.list[i].wind.speed)}m/s</p>
-            <p>Humidity: ${forecastData.list[i].main.humidity}%</p>
-        </div>
-            
-        `)
-    } 
+
 
 }
 
