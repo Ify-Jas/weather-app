@@ -5,6 +5,7 @@ var forecastCard = $('.forecast-card');
 var listGroup = $('.list-group');
 var forMedia = $('.forMedia');
 var forMediaForecast = $('.forMediaForecast');
+var maxWidth = document.body.style.maxWidth
 
 function noCity() {
     todayCard.html('<p>Please type a city to search.</p>')
@@ -18,7 +19,8 @@ function displayWeather(currentData){
 
     if(!city) {
         noCity();
-    } else if(city && document.body.style.maxWidth<= 468){
+    } 
+    else if(city && maxWidth<= 468){
         forMedia.append(`
         <div class="weather-card-main">
            <h3>${currentData.name}   (${todayDate}) </h3>
@@ -28,7 +30,8 @@ function displayWeather(currentData){
            <p>Humidity: ${currentData.main.humidity}%</p>
         </div>
         `)
-    } else{
+    } 
+    else{
         todayCard.append(`
         <div class="weather-card-main">  
            <h3>${currentData.name}   (${todayDate}) </h3>
@@ -49,7 +52,7 @@ function displayForecast(forecastData){
     forecastCard.html('');
     var city = searchInput.val().trim();
     
-    if(document.body.style.maxWidth <= 468){
+    if(maxWidth <= 468){
         for(var i=4; i < 37; i+=8) {
             var iconImgForecast = forecastData.list[i].weather[0].icon;
             var forecastDay = forecastData.list[i].dt_txt
